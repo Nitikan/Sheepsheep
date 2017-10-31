@@ -56,6 +56,8 @@ class SpaceGameWindow(arcade.Window):
 
         self.wolf_sprite = ModelSprite('images/wolf.png',0.15,model=self.world.wolf)
 
+        self.bush_sprite = ModelSprite('images/bush.png',0.35,model=self.world.bush)
+
     def on_key_press(self, key, key_modifiers):
 
         self.world.on_key_press(key, key_modifiers)
@@ -75,7 +77,7 @@ class SpaceGameWindow(arcade.Window):
 
         self.wolf_sprite.draw()
 
-
+        self.bush_sprite.draw()
 
 if __name__ == '__main__':
 

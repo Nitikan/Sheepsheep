@@ -90,6 +90,18 @@ class Wolf(Model):
 
         self.y = randint(0, self.world.height - 1)
 
+class Bush(Model):
+
+    def __init__(self, world, x, y):
+
+        super().__init__(world, x, y, 0)
+
+    def random_location(self):
+
+        self.x = randint(0, self.world.width - 1)
+
+        self.y = randint(0, self.world.height - 1)
+
 class World:
 
     def __init__(self, width, height):
@@ -102,7 +114,9 @@ class World:
 
         self.sheep = Sheep(self, 100, 100)
 
-        self.wolf = Wolf(self, 100, 100)
+        self.wolf = Wolf(self, 800, 100)
+
+        self.bush = Bush(self, 100, 100)
 
         self.score = 0
 

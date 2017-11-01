@@ -26,53 +26,43 @@ class Sheep(Model):
 
     
 
-    def __init__(self, world, x, y):
+    def __init__(self, width, height, x, y):
 
-        super().__init__(world, x, y, 0)
-
-        self.direction = Sheep.DIR_VERTICAL
-
-    def switch_direction(self):
-        """if keys[key.LEFT]:
-            self.x -= 4
-        if keys[key.RIGHT]:
-            self.x += 4
-        if keys[key.UP]:
-            self.y += 4
-        if keys[key.DOWN]:
-            self.y -= 4"""
+        self.x = x
         
-        if self.direction == Sheep.DIR_HORIZONTAL:
+        self.speedx = 0
+        
+        self.y = y
 
-            self.direction = Sheep.DIR_VERTICAL
+        self.speedy = 0
+        
+        self.width = width
 
-            self.angle = 0
+        self.height = height
 
-        else:
-
-            self.direction = Sheep.DIR_HORIZONTAL
-
-            self.angle = -90
-
- 
+        self.angle = 0
 
     def update(self, delta):
 
-        if self.direction == Sheep.DIR_VERTICAL:
+        self.x += self.speedx
 
-            if self.y > self.world.height:
+        self.y += self.speedy
 
-                self.y = 0
+        if self.x > self.width :
 
-            self.y += 5
+            self.x = 0
+        
+        elif self.x < 0 :
 
-        else:
+            self.x = self.width 
+        
+        elif self.y > self.height:
 
-            if self.x > self.world.width:
+            self.y = 0
 
-                self.x = 0
+        elif self.y < 0:
 
-            self.x += 5
+            self.y = self.height
 
 class Grass(Model):
 
@@ -120,19 +110,41 @@ class World:
 
         self.grass= Grass(self, 400, 400)
 
-        self.sheep = Sheep(self, 100, 100)
+        self.sheep = Sheep(self.width, self.height , 600, 400)
 
         self.wolf = Wolf(self, 800, 100)
 
-        self.bush = Bush(self, 100, 100)
+        self.bush = Bush(self, 50, 50)
+
 
         self.score = 0
 
     def on_key_press(self, key, key_modifiers):
 
-        if key == arcade.key.SPACE:
+        if key == arcade.key.UP:
 
-            self.sheep.switch_direction()
+            self.sheep.speedy = 5
+
+            #self.sheep.speedx = 0
+        
+        elif key == arcade.key.DOWN: 
+    
+            self.sheep.speedy = -5
+
+            #self.sheep.speedx = 0
+        
+        elif key == arcade.key.RIGHT: 
+
+            self.sheep.speedx = 5
+
+            self.sheep.speedy = 0
+        
+        elif key == arcade.key.LEFT:
+
+            self.sheep.speedx = -5
+
+            self.sheep.speedy = 0
+        
 
     def update(self, delta):
 

@@ -1,14 +1,10 @@
 import arcade
 
-import arcade.key
-
-from pyglet.window import key
-
 from models import Sheep,World
 
 from random import randint
 
-keys = key.KeyStateHandler()
+#keys = key.KeyStateHandler()
 
 SCREEN_WIDTH = 1200
 
@@ -62,7 +58,7 @@ class SpaceGameWindow(arcade.Window):
 
         self.wolf_sprite = ModelSprite('images/wolf.png',0.15,model=self.world.wolf)
 
-        self.bush_sprite = ModelSprite('images/bush.png',0.3,model=self.world.bush)
+        self.bush_sprite = ModelSprite('images/bush.png',0.5,model=self.world.bush)
 
         #arcade.get_window().push_handlers(keys)
 
@@ -94,6 +90,7 @@ class SpaceGameWindow(arcade.Window):
                          arcade.color.WHITE, 40)
 
 if __name__ == '__main__':
+
 
     window = SpaceGameWindow(SCREEN_WIDTH, SCREEN_HEIGHT)
 

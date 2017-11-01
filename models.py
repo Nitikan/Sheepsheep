@@ -20,19 +20,13 @@ class Model:
 
 class Sheep(Model):
 
-    DIR_HORIZONTAL = 0
-
-    DIR_VERTICAL = 1
-
-    
-
     def __init__(self, width, height, x, y):
 
         self.x = x
         
-        self.speedx = 0
-        
         self.y = y
+
+        self.speedx = 0
 
         self.speedy = 0
         
@@ -126,24 +120,32 @@ class World:
             self.sheep.speedy = 5
 
             #self.sheep.speedx = 0
+
+            self.sheep.angle = -180
         
         elif key == arcade.key.DOWN: 
     
             self.sheep.speedy = -5
 
             #self.sheep.speedx = 0
+            
+            self.sheep.angle = 0
         
         elif key == arcade.key.RIGHT: 
 
             self.sheep.speedx = 5
 
             self.sheep.speedy = 0
+
+            self.sheep.angle = 90
         
         elif key == arcade.key.LEFT:
 
             self.sheep.speedx = -5
 
             self.sheep.speedy = 0
+
+            self.sheep.angle = -90
         
 
     def update(self, delta):

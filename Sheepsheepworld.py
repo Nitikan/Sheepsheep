@@ -4,7 +4,8 @@ from models import Sheep,World
 
 from random import randint
 
-#keys = key.KeyStateHandler()
+
+
 
 SCREEN_WIDTH = 1200
 
@@ -15,7 +16,7 @@ class ModelSprite(arcade.Sprite):
     def __init__(self, *args, **kwargs):
 
         self.model = kwargs.pop('model', None)
-
+        
  
 
         super().__init__(*args, **kwargs)
@@ -34,7 +35,7 @@ class ModelSprite(arcade.Sprite):
 
         self.sync_with_model()
 
-        #sheep.control(keys)   
+
 
         super().draw()
 
@@ -60,7 +61,7 @@ class SpaceGameWindow(arcade.Window):
 
         self.bush_sprite = ModelSprite('images/bush.png',0.5,model=self.world.bush)
 
-        #arcade.get_window().push_handlers(keys)
+
 
     def on_key_press(self, key, key_modifiers):
 

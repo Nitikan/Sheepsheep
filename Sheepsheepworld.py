@@ -2,9 +2,13 @@ import arcade
 
 import arcade.key
 
+from pyglet.window import key
+
 from models import Sheep,World
 
 from random import randint
+
+keys = key.KeyStateHandler()
 
 SCREEN_WIDTH = 1200
 
@@ -34,6 +38,8 @@ class ModelSprite(arcade.Sprite):
 
         self.sync_with_model()
 
+        #sheep.control(keys)   
+
         super().draw()
 
 
@@ -46,7 +52,7 @@ class SpaceGameWindow(arcade.Window):
 
  
 
-        arcade.set_background_color(arcade.color.BLACK)
+        arcade.set_background_color(arcade.color.LEMON)
 
         self.world = World(width,height)
 
@@ -56,7 +62,9 @@ class SpaceGameWindow(arcade.Window):
 
         self.wolf_sprite = ModelSprite('images/wolf.png',0.15,model=self.world.wolf)
 
-        self.bush_sprite = ModelSprite('images/bush.png',0.35,model=self.world.bush)
+        self.bush_sprite = ModelSprite('images/bush.png',0.3,model=self.world.bush)
+
+        #arcade.get_window().push_handlers(keys)
 
     def on_key_press(self, key, key_modifiers):
 
@@ -78,6 +86,12 @@ class SpaceGameWindow(arcade.Window):
         self.wolf_sprite.draw()
 
         self.bush_sprite.draw()
+
+        arcade.draw_text(str(self.world.score),
+
+                         self.width - 50, self.height - 50,
+
+                         arcade.color.WHITE, 40)
 
 if __name__ == '__main__':
 

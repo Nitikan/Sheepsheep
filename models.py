@@ -33,7 +33,15 @@ class Sheep(Model):
         self.direction = Sheep.DIR_VERTICAL
 
     def switch_direction(self):
-
+        """if keys[key.LEFT]:
+            self.x -= 4
+        if keys[key.RIGHT]:
+            self.x += 4
+        if keys[key.UP]:
+            self.y += 4
+        if keys[key.DOWN]:
+            self.y -= 4"""
+        
         if self.direction == Sheep.DIR_HORIZONTAL:
 
             self.direction = Sheep.DIR_VERTICAL
@@ -129,4 +137,15 @@ class World:
     def update(self, delta):
 
         self.sheep.update(delta)
+
+        
+        if self.sheep.hit(self.grass, 15):
+
+            self.grass.random_location()
+
+            self.score += 1
+
+        if self.wolf.hit(self.sheep, 15):
+
+            exit()
 

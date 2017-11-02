@@ -87,7 +87,12 @@ class SpaceGameWindow(arcade.Window):
             i.draw()
 
         self.bush_sprite.draw()
+        if(self.world.status == 1):
+            arcade.draw_text("gameover",
 
+                         self.width //2 - 100, self.height //2,
+
+                         arcade.color.GRAY, 40)
         arcade.draw_text(str(self.world.score),
 
                          self.width - 50, self.height - 50,

@@ -94,6 +94,8 @@ class Wolf(Model):
 
             self.speedy *= -1
 
+
+
 class Bush(Model):
 
     def __init__(self, world, x, y):
@@ -122,8 +124,9 @@ class World:
             self.enemy.append(Wolf(self, 800, 100))
         
         self.bush = Bush(self, 50, 50)
-
-
+        self.dotx = self.bush.x + 128
+        self.doty = self.bush.y + 128
+        self.status = 0
         self.score = 0
 
     def on_key_press(self, key, key_modifiers):
@@ -162,19 +165,22 @@ class World:
         
 
     def update(self, delta):
-
-        self.sheep.update(delta)
-        #self.wolf.walk()
-        for i in self.enemy:
-            i.walk()
+        if(self.status == 0):
+            self.sheep.update(delta)
+            #self.wolf.walk()
+            for i in self.enemy:
+                i.walk()
         
-        if self.sheep.hit(self.grass, 15):
+            if self.sheep.hit(self.grass, 15):
 
-            self.grass.random_location()
+                self.grass.random_location()
 
-            self.score += 1
-
-        #if self.wolf.hit(self.sheep, 15):
-
-           #exit()
+                self.score += 1
+        
+            for i in self.enemy:
+                if(i.x<self.dotx and i.y <self.doty):
+                    i.speedx*=-1
+                    i.speedy*=-1
+                if i.hit(self.sheep, 15):
+                    self.status = 1
 

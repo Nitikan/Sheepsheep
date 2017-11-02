@@ -72,6 +72,9 @@ class SpaceGameWindow(arcade.Window):
     def update(self, delta):
 
         self.world.update(delta)
+        for i in self.world.tmpenemy:
+            self.enemy.append(ModelSprite('images/wolf.png',0.15,model=i))
+        self.world.tmpenemy = []
 
 
     def on_draw(self):
@@ -88,11 +91,12 @@ class SpaceGameWindow(arcade.Window):
 
         self.bush_sprite.draw()
         if(self.world.status == 1):
-            arcade.draw_text("gameover",
+            arcade.draw_text("GAME OVER",
 
                          self.width //2 - 100, self.height //2,
 
                          arcade.color.GRAY, 40)
+
         arcade.draw_text(str(self.world.score),
 
                          self.width - 50, self.height - 50,

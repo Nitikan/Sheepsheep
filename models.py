@@ -78,9 +78,9 @@ class Wolf(Model):
         
         self.speedx = randint(-7,7)
         self.speedy = randint(-7,7)
-        self.x = randint(0, self.world.width - 1)
+        self.x = randint(200, 1000)
 
-        self.y = randint(0, self.world.height - 1)
+        self.y = randint(200, 600)
 
     def walk(self):
         self.x += self.speedx
@@ -120,14 +120,16 @@ class World:
 
         self.sheep = Sheep(self.width, self.height , 600, 400)
         self.enemy = []
-        for i in range(4):
+        for i in range(5):
             self.enemy.append(Wolf(self, 800, 100))
-        
-        self.bush = Bush(self, 50, 50)
+        self.bush = Bush(self,120, 80)
         self.dotx = self.bush.x + 128
         self.doty = self.bush.y + 128
         self.status = 0
+        self.tmpenemy = []
+        self.tmp = None
         self.score = 0
+        self.limitscore = 2
 
     def on_key_press(self, key, key_modifiers):
 
@@ -164,7 +166,7 @@ class World:
             self.sheep.angle = -90
         
 
-    def update(self, delta):
+    def update(self, delta):    
         if(self.status == 0):
             self.sheep.update(delta)
             #self.wolf.walk()
@@ -176,7 +178,14 @@ class World:
                 self.grass.random_location()
 
                 self.score += 1
-        
+
+            if self.score == self.limitscore:
+                for i in range(1):
+                    self.tmp = Wolf(self, 800, 100)
+                    self.tmpenemy.append(self.tmp)
+                    self.enemy.append(self.tmp)
+                self.limitscore+=2    
+
             for i in self.enemy:
                 if(i.x<self.dotx and i.y <self.doty):
                     i.speedx*=-1

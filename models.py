@@ -75,12 +75,24 @@ class Wolf(Model):
     def __init__(self, world, x, y):
 
         super().__init__(world, x, y, 0)
-
-    def random_location(self):
-
+        
+        self.speedx = randint(-7,7)
+        self.speedy = randint(-7,7)
         self.x = randint(0, self.world.width - 1)
 
         self.y = randint(0, self.world.height - 1)
+
+    def walk(self):
+        self.x += self.speedx
+        self.y += self.speedy
+    
+        if self.x > self.world.width or self.x < 0 :
+
+            self.speedx *= -1
+        
+        if self.y > self.world.height or self.y < 0:
+
+            self.speedy *= -1
 
 class Bush(Model):
 
@@ -105,9 +117,10 @@ class World:
         self.grass= Grass(self, 400, 400)
 
         self.sheep = Sheep(self.width, self.height , 600, 400)
-
-        self.wolf = Wolf(self, 800, 100)
-
+        self.enemy = []
+        for i in range(4):
+            self.enemy.append(Wolf(self, 800, 100))
+        
         self.bush = Bush(self, 50, 50)
 
 
@@ -151,7 +164,9 @@ class World:
     def update(self, delta):
 
         self.sheep.update(delta)
-
+        #self.wolf.walk()
+        for i in self.enemy:
+            i.walk()
         
         if self.sheep.hit(self.grass, 15):
 
@@ -159,7 +174,7 @@ class World:
 
             self.score += 1
 
-        if self.wolf.hit(self.sheep, 15):
+        #if self.wolf.hit(self.sheep, 15):
 
-            exit()
+           #exit()
 

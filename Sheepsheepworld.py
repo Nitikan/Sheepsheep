@@ -49,7 +49,7 @@ class SpaceGameWindow(arcade.Window):
 
  
 
-        arcade.set_background_color(arcade.color.LEMON)
+        arcade.set_background_color(arcade.color.LEMON_MERINGUE)
 
         self.world = World(width,height)
 
@@ -57,7 +57,9 @@ class SpaceGameWindow(arcade.Window):
 
         self.grass_sprite = ModelSprite('images/grass.png',0.15,model=self.world.grass)
 
-        self.wolf_sprite = ModelSprite('images/wolf.png',0.15,model=self.world.wolf)
+        self.enemy = []
+        for i in self.world.enemy:
+             self.enemy.append(ModelSprite('images/wolf.png',0.15,model=i))    
 
         self.bush_sprite = ModelSprite('images/bush.png',0.5,model=self.world.bush)
 
@@ -80,7 +82,9 @@ class SpaceGameWindow(arcade.Window):
 
         self.grass_sprite.draw()
 
-        self.wolf_sprite.draw()
+
+        for i in self.enemy:
+            i.draw()
 
         self.bush_sprite.draw()
 
@@ -88,7 +92,7 @@ class SpaceGameWindow(arcade.Window):
 
                          self.width - 50, self.height - 50,
 
-                         arcade.color.WHITE, 40)
+                         arcade.color.GRAY, 40)
 
 if __name__ == '__main__':
 

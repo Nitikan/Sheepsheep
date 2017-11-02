@@ -56,19 +56,15 @@ class Wolf(Model):
     def walk(self):
         self.x += self.speedx
         self.y += self.speedy    
-        if self.x > self.world.width or self.x < 0 :
+        if self.x > self.world.width-10 or self.x<10 :
             self.speedx *= -1
-        if self.y > self.world.height or self.y < 0:
+        if self.y > self.world.height-10 or self.y<10:
             self.speedy *= -1
 
 class Bush(Model):
 
     def __init__(self, world, x, y):
         super().__init__(world, x, y, 0)
-
-    def random_location(self):
-        self.x = randint(0, self.world.width - 1)
-        self.y = randint(0, self.world.height - 1)
 
 class World:
 
@@ -112,7 +108,7 @@ class World:
             self.sheep.angle = -90
         
     def update(self, delta):    
-        if(self.status == 0):
+        if self.status == 0:
             self.sheep.update(delta)
             #self.wolf.walk()
             for i in self.enemy:
@@ -127,7 +123,7 @@ class World:
                     self.enemy.append(self.tmp)
                 self.limitscore+=2    
             for i in self.enemy:
-                if(i.x<self.dotx and i.y <self.doty):
+                if i.x<self.dotx and i.y <self.doty:
                     i.speedx*=-1
                     i.speedy*=-1
                 if i.hit(self.sheep, 15):

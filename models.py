@@ -72,7 +72,7 @@ class World:
         self.width = width
         self.height = height
         self.grass= Grass(self, 400, 400)
-        self.sheep = Sheep(self.width, self.height , 600, 400)
+        self.sheep = Sheep(self.width, self.height , 400, 300)
         self.enemy = []
         for i in range(5):
             self.enemy.append(Wolf(self, 800, 100))

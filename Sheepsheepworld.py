@@ -58,7 +58,7 @@ class SpaceGameWindow(arcade.Window):
         if self.world.status == 1:
             arcade.draw_text("GAME OVER",self.width //2 - 250, self.height //2+20,arcade.color.GRAY, 80)
             arcade.draw_text("score : {}".format(self.world.score),self.width //2 - 80, self.height //2-50,arcade.color.GRAY, 40)
-
+           
 if __name__ == '__main__':
     window = SpaceGameWindow(SCREEN_WIDTH, SCREEN_HEIGHT)
     arcade.run()
